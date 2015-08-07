@@ -36,31 +36,6 @@ if [ ! -d "$HOME/.bin/" ]; then
   mkdir "$HOME/.bin"
 fi
 
-if [ ! -f "$HOME/.zshrc" ]; then
-  touch $HOME/.zshrc
-fi
-
-if [[ ":$PATH:" != *":$HOME/.bin:"* ]]; then
-  echo 'export PATH="$HOME/.bin:$PATH"' >> ~/.zshrc
-fi
-
-## ZSH and Oh-My-ZSH
-fancy_echo "Installing ZSH ..."
-  sudo aptitude install -y zsh
-
-fancy_echo "Setting ZSH as default, please enter your password:"
-  chsh -s $(which zsh)
-
-fancy_echo "Installing Oh-My-ZSH ..."
-  git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-  cp ~/.zshrc ~/.zshrc.orig
-  cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
-
-if [ ! -n "$ZSH" ]; then
-  ZSH=~/.oh-my-zsh
-fi
-
 ## Redis
 fancy_echo "Installing Redis, a good key-value database ..."
   sudo aptitude install -y redis-server
@@ -128,8 +103,3 @@ fancy_echo "Installing Rails ..."
 
 fancy_echo "Installing PostgreSQL Ruby interface ..."
   gem install pg
-
-clear
-
-fancy_echo "Ready and running ZSH ..."
-  zsh
